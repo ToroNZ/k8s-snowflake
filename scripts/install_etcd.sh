@@ -5,7 +5,8 @@ set -o pipefail
 # From https://github.com/coreos/etcd/releases
 # OR
 # curl -sSL https://api.github.com/repos/coreos/etcd/releases/latest | jq .tag_name
-ETCD_VERSION="v3.2.9"
+#ETCD_VERSION="v3.2.9"
+ETCD_VERSION=$(curl -s https://api.github.com/repos/coreos/etcd/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 install_etcd() {
 	local download_uri="https://github.com/coreos/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz"

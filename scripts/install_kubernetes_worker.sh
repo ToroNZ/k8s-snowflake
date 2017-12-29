@@ -5,12 +5,13 @@ set -o pipefail
 # From https://github.com/kubernetes/kubernetes/releases
 # OR
 # curl -sSL https://storage.googleapis.com/kubernetes-release/release/stable.txt
-KUBERNETES_VERSION=v1.8.3
+KUBERNETES_VERSION=v1.8.6
 
 # From https://github.com/containernetworking/plugins/releases
 # OR
 # curl -sSL https://api.github.com/repos/containernetworking/plugins/releases/latest | jq .tag_name
-CNI_VERSION=v0.6.0
+#CNI_VERSION=v0.6.0
+CNI_VERSION=$(curl -s https://api.github.com/repos/containernetworking/plugins/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 # From https://github.com/Azure/azure-container-networking/releases
 # OR
@@ -20,7 +21,8 @@ AZURE_CNI_VERSION=v0.91
 # From https://github.com/kubernetes-incubator/cri-containerd/releases
 # OR
 # curl -sSL https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | jq .tag_name
-CRI_CONTAINERD_VERSION=1.0.0-alpha.1
+#CRI_CONTAINERD_VERSION=1.0.0-alpha.1
+CRI_CONTAINERD_VERSION=$(curl -s https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 install_cni() {
 	local download_uri="https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-amd64-${CNI_VERSION}.tgz"
