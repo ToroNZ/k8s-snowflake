@@ -5,13 +5,13 @@ set -o pipefail
 # From https://github.com/kubernetes/kubernetes/releases
 # OR
 # curl -sSL https://storage.googleapis.com/kubernetes-release/release/stable.txt
-KUBERNETES_VERSION=v1.8.6
+KUBERNETES_VERSION=v1.9.0
 
 # From https://github.com/containernetworking/plugins/releases
 # OR
 # curl -sSL https://api.github.com/repos/containernetworking/plugins/releases/latest | jq .tag_name
-#CNI_VERSION=v0.6.0
-CNI_VERSION=$(curl -s https://api.github.com/repos/containernetworking/plugins/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
+CNI_VERSION=v0.6.0
+#CNI_VERSION=$(curl -sSL https://api.github.com/repos/containernetworking/plugins/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 # From https://github.com/Azure/azure-container-networking/releases
 # OR
@@ -21,8 +21,8 @@ AZURE_CNI_VERSION=v0.91
 # From https://github.com/kubernetes-incubator/cri-containerd/releases
 # OR
 # curl -sSL https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | jq .tag_name
-#CRI_CONTAINERD_VERSION=1.0.0-alpha.1
-CRI_CONTAINERD_VERSION=$(curl -s https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
+CRI_CONTAINERD_VERSION=1.0.0-beta.0
+#CRI_CONTAINERD_VERSION=$(curl -sSL https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 install_cni() {
 	local download_uri="https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-amd64-${CNI_VERSION}.tgz"
@@ -70,8 +70,8 @@ install_azure_cni() {
 
 install_cri_containerd() {
 	# TODO: fix this when this is merged https://github.com/kubernetes-incubator/cri-containerd/pull/415
-	# local download_uri="https://github.com/kubernetes-incubator/cri-containerd/releases/download/v${CRI_CONTAINERD_VERSION}/cri-containerd-${CRI_CONTAINERD_VERSION}.tar.gz"
-	local download_uri="https://misc.j3ss.co/tmp/cri-containerd-${CRI_CONTAINERD_VERSION}-dirty.tar.gz"
+	local download_uri="https://github.com/kubernetes-incubator/cri-containerd/releases/download/v${CRI_CONTAINERD_VERSION}/cri-containerd-${CRI_CONTAINERD_VERSION}.linux-amd64.tar.gz"
+	#local download_uri="https://misc.j3ss.co/tmp/cri-containerd-${CRI_CONTAINERD_VERSION}-dirty.tar.gz"
 
 	curl -sSL "$download_uri" | tar -xz -C /
 }
