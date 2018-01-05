@@ -99,6 +99,13 @@ Name=ens192
 Address=192.168.37.11/24
 Gateway=192.168.37.254
 DNS=192.168.2.217
+
+[Route]
+Gateway=192.168.37.10
+Destination=10.200.0.0/24
+[Route]
+Gateway=192.168.37.12
+Destination=10.200.2.0/24
 ```
 
 Example of static IP on the controller:
