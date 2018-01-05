@@ -63,7 +63,7 @@ do_certs(){
 
 	echo "Copying certs to worker nodes..."
 	for i in $(seq 0 "$WORKERS"); do
-		instance="worker-node-${i}"
+		instance="worker-node-${i}${DOMAIN_SUFFIX}"
 
 		# get the external ip for the instance
 		# this is cloud provider specific
@@ -97,7 +97,7 @@ do_kubeconfigs(){
 	echo "Kubeconfigs successfully generated in ${KUBECONFIG_TMP_DIR}!"
 	echo "Copying kubeconfigs to worker nodes..."
 	for i in $(seq 0 "$WORKERS"); do
-		instance="worker-node-${i}"
+		instance="worker-node-${i}${DOMAIN_SUFFIX}"
 
 		# get the external ip for the instance
 		# this is cloud provider specific
@@ -261,7 +261,7 @@ do_k8s_controller(){
 
 do_k8s_worker(){
 	for i in $(seq 0 "$WORKERS"); do
-		instance="worker-node-${i}"
+		instance="worker-node-${i}${DOMAIN_SUFFIX}"
 
 		# get the external ip for the instance
 		# this is cloud provider specific
@@ -327,7 +327,7 @@ do_end_checks(){
 		controller_ip=${IPCTRL1}
 		echo "Make sure you add a static route for each worker CIDR on the controller-node..."
 		for i in $(seq 0 "$WORKERS"); do
-		instance="worker-node-${i}"
+		instance="worker-node-${i}${DOMAIN_SUFFIX}"
         worker_ip=$(ping -c1 ${instance} | awk '/PING/ { print $3 }' | tr -d '()')
         echo "route add -net 10.200.${i}.0 netmask 255.255.255.0 gw ${worker_ip}"
 		done
