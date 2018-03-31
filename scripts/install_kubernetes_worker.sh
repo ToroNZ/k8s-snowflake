@@ -21,7 +21,7 @@ AZURE_CNI_VERSION=v0.91
 # From https://github.com/kubernetes-incubator/cri-containerd/releases
 # OR
 # curl -sSL https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | jq .tag_name
-CRI_CONTAINERD_VERSION=1.0.0-beta.0
+CRI_CONTAINERD_VERSION=1.0.0-rc.0
 #CRI_CONTAINERD_VERSION=$(curl -sSL https://api.github.com/repos/kubernetes-incubator/cri-containerd/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 install_cni() {
