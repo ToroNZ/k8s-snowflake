@@ -5,12 +5,12 @@ set -o pipefail
 # From https://github.com/kubernetes/kubernetes/releases
 # OR
 # curl -sSL https://storage.googleapis.com/kubernetes-release/release/stable.txt
-KUBERNETES_VERSION=v1.9.0
+KUBERNETES_VERSION=v1.10.0
 
 # From https://github.com/containernetworking/plugins/releases
 # OR
 # curl -sSL https://api.github.com/repos/containernetworking/plugins/releases/latest | jq .tag_name
-CNI_VERSION=v0.6.0
+CNI_VERSION=v0.7.0
 #CNI_VERSION=$(curl -sSL https://api.github.com/repos/containernetworking/plugins/releases/latest | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["'tag_name'"]')
 
 # From https://github.com/Azure/azure-container-networking/releases
