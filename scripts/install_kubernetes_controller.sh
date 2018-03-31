@@ -5,7 +5,7 @@ set -o pipefail
 # From https://github.com/kubernetes/kubernetes/releases
 # OR
 # curl -sSL https://storage.googleapis.com/kubernetes-release/release/stable.txt
-KUBERNETES_VERSION=v1.9.0
+KUBERNETES_VERSION=v1.10.0
 
 install_kubernetes_controller() {
 	local download_uri="https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64"
