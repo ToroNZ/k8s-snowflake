@@ -69,6 +69,8 @@ metadata:
   name: cilium
   namespace: kube-system
 spec:
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -99,6 +101,7 @@ spec:
           - "etcd.config=/var/lib/etcd-config/etcd.config"
           - "--disable-ipv4=$(DISABLE_IPV4)"
           - "--k8s-kubeconfig-path=/host/var/lib/kubelet/kubeconfig"
+          - "--envoy-proxy"
         lifecycle:
           postStart:
             exec:
